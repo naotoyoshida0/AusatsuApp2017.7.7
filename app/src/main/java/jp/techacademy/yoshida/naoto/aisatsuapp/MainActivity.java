@@ -22,10 +22,14 @@ import org.w3c.dom.Text;
 
 import java.util.Date;
 
+import static android.R.attr.button;
+import static jp.techacademy.yoshida.naoto.aisatsuapp.R.id.button1;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
     TextView mTextView;
     EditText mEditText;
+    int hour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {                                   //クリックリスナーの中身
-        if (v.getId() == R.id.button1) {                            //ボタン１が押された場合
-            mTextView.setText("");                                 //textviewに任意の文字を入れれるようにするsetTextとmEdittext(文字）を取得する為にgettextと書いてあるが文字の為Stringクラスに変換しないと取得出来ない
+        if (v.getId() ==R.id.button1) {//ボタン１が押された場合
+
+
+            if (2 >= hour && hour < 9) {
+                mTextView.setText ( "おはよう");
+            }
+            else if (10 >=  hour && hour < 17) {
+                mTextView.setText ( "こんにちは");
+            }
+            else   {
+                mTextView.setText ( "こんばんは");
+            }
+
         } else if (v.getId() == R.id.button2)  {                   //ボタン２が押された場合
             showTimePickerDialog();                                  //タイムピッカーが表示される
         }
@@ -72,21 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)  {
                         Log.d("UI-PARTS", String.valueOf(hourOfDay) +":" + String.valueOf(minute));          //文字列に変換したhourとminuteをLogに出力？
-                        int hour = hourOfDay;                                                                 //int型変数hourを使い、hourOfDayを代入している
-                        int min = minute;                                                                    //int型変数minを使い、minuteを代入している
+                         hour = hourOfDay;                                                                 //int型変数hourを使い、hourOfDayを代入している
+                         int min = minute;                                                                    //int型変数minを使い、minuteを代入している
 
 
 
-                        if (2 >=  hour && hour < 9) {
-                           mTextView.setText ( "おはよう");
-                        }
-
-                        else if (10 >=  hour && hour < 17) {
-                           mTextView.setText ( "こんにちは");
-                        }
-                        else   {
-                           mTextView.setText ( "こんばんは");
-                        }
 
                     }
                 },
